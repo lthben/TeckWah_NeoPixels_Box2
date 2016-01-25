@@ -224,9 +224,10 @@ void Strip3Complete();
 // -----------------------------
 // Object declarations
 // -----------------------------
-NeoPatterns Strip1(18, 4, NEO_GRB + NEO_KHZ800, &Strip1Complete);
-NeoPatterns Strip2(60, 2, NEO_GRB + NEO_KHZ800, &Strip2Complete);
-//NeoPatterns Strip3(300, 6, NEO_GRB + NEO_KHZ800, &Strip3Complete);
+NeoPatterns Strip1(16, 2, NEO_GRB + NEO_KHZ800, &Strip1Complete); //button1
+NeoPatterns Strip2(18, 3, NEO_GRB + NEO_KHZ800, &Strip2Complete); //button2
+NeoPatterns Strip3(60, 4, NEO_GRB + NEO_KHZ800, &Strip3Complete); //ring1
+NeoPatterns Strip4(60, 5, NEO_GRB + NEO_KHZ800, &Strip4Complete); //ring2
 
 //------------------------------
 // setup
@@ -234,12 +235,7 @@ NeoPatterns Strip2(60, 2, NEO_GRB + NEO_KHZ800, &Strip2Complete);
 void setup() {
   Serial.begin(9600);
 
-  Strip1.begin();
-  Strip2.begin();
-//  Strip3.begin();
-
-//Strip1.RainbowCycle(2);
-//  Strip1.Scanner( Strip1.Color(255,0,0), 100, 1);
+  Strip1.begin(); Strip2.begin(); Strip3.begin(); Strip4.begin();
 }
 
 //-------------------------
@@ -248,9 +244,7 @@ void setup() {
 
 void loop() {
 
-  Strip1.Update();
-  Strip2.Update();
-//  Strip3.Update();
+  Strip1.Update(); Strip2.Update(); Strip3.Update();Strip4.Update(); 
   
   read_from_serial();
 }
@@ -261,53 +255,13 @@ void loop() {
 
 void read_from_serial() { //refer to other tab for command list
 
-  unsigned char incomingbyte = 0;
+  int incoming = 0;
 
   if (Serial.available() > 0) {
         
-    incomingbyte = Serial.read();
-
-    if (incomingbyte == '0') {
-
-        Strip1.ColorSet( Strip1.whiteColor );
-
-    } else if (incomingbyte == '1') {
-
-        Strip1.ColorSet( Strip1.noColor );
-      
-    } else if (incomingbyte == '2') {
-
-        Strip1.ColorSet( Strip1.warmWhiteColor );
-      
-    } else if (incomingbyte == '3') {
-
-        Strip1.ColorSet( Strip1.yellowColor );
-      
-    } else if (incomingbyte == '4') {
-        
-        Strip2.ColorSet( Strip1.pinkColor);
-
-    } else if (incomingbyte == '5') {
-
-        Strip2.ColorSet( Strip1.greenColor);
-        
-    }  else if (incomingbyte == '6') {
-
-     Strip2.ColorSet( Strip1.yellowColor);
-
-    } else if (incomingbyte == '7') {
-
-        Strip2.ColorSet( Strip1.blueColor);
-        
-    } else if (incomingbyte == '8') {
-
-        Strip2.Scanner( Strip1.redColor, 50, 1);
-        
-    } else if (incomingbyte == '9') {
-
-        Strip2.ColorSet(Strip1.noColor);
-        
-    } 
+    incoming = Serial.read();
+    
+    process_command(incoming);
   }
 }
 
@@ -317,8 +271,6 @@ void read_from_serial() { //refer to other tab for command list
 
 void Strip1Complete() {
   if (DEBUG)  Serial.println("strip 1 complete");
-//  Strip1.ColorSet( Strip1.noColor );
-  //Strip1.Scanner( Strip1.Color(255,0,0), 100, 1 );
 }
 
 void Strip2Complete() {
@@ -327,6 +279,10 @@ void Strip2Complete() {
 
 void Strip3Complete() {
   if (DEBUG)  Serial.println("strip 3 complete");
+}
+
+void Strip4Complete() {
+  if (DEBUG)  Serial.println("strip 4 complete");
 }
 
 
