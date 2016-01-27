@@ -1,16 +1,18 @@
 /* Author: Benjamin Low
  * 
- * Description: Teck Wah gallery NeoPixels Box 1
+ * Description: Teck Wah gallery NeoPixels Box 2 - Button x 2, Ring x 2,
+ *              Display x 3, Panel x 3, Map x 2
  *
- * Last updated: 23 Jan 2016
+ * Last updated: 27 Jan 2016
  */
 
 #include <Adafruit_NeoPixel.h> 
 
 //USER DEFINED SETTINGS
 bool DEBUG = false;
+const int FADE_INTERVAL = 10; //lower number is higher speed for fade
 
-enum  pattern { NONE, SCANNER };
+enum  pattern { NONE, SCANNER, FADE };
 enum  direction { FORWARD, REVERSE };
 
 // NeoPattern Class - derived from the Adafruit_NeoPixel class
@@ -59,6 +61,9 @@ class NeoPatterns : public Adafruit_NeoPixel
                 case SCANNER:
                     ScannerUpdate();
                     break;
+                case FADE:
+                    FadeUpdate();
+                break;
                 default:
                     break;
             }
@@ -100,6 +105,7 @@ class NeoPatterns : public Adafruit_NeoPixel
 
     void TurnOff() {
         ColorSet(Color(0,0,0));
+        ActivePattern = NONE;
     }
     
     void Scanner(uint32_t color1, uint8_t interval, int my_dir)
@@ -149,7 +155,44 @@ class NeoPatterns : public Adafruit_NeoPixel
         show();
         Increment();
     }
+
+     // Initialize for a Fade
+    void Fade(uint32_t _color1, uint16_t steps, uint8_t interval, int state)
+    {   //state is 1 for fade on, 0 for fade off
+        
+        ActivePattern = FADE;
+        Interval = interval;
+        TotalSteps = steps;
+        Index = 0;
+        
+        if (state == 1) //turn on 
+        {   
+            Color1 = noColor;
+            Color2 = _color1;
+            Direction = FORWARD;
+            
+        } else if (state == 0) //turn off
+        {
+            Color1 = _color1;
+            Color2 = noColor;
+            Direction = REVERSE;
+        }
+    }
     
+    // Update the Fade Pattern
+    void FadeUpdate()
+    {
+        // Calculate linear interpolation between Color1 and Color2
+        // Optimise order of operations to minimize truncation error
+
+        uint8_t red = ((Red(Color1) * (TotalSteps - Index)) + (Red(Color2) * Index)) / TotalSteps;
+        uint8_t green = ((Green(Color1) * (TotalSteps - Index)) + (Green(Color2) * Index)) / TotalSteps;
+        uint8_t blue = ((Blue(Color1) * (TotalSteps - Index)) + (Blue(Color2) * Index)) / TotalSteps;
+            
+        ColorSet(Color(red, green, blue));
+        show();
+        Increment();
+    }
    
     // Calculate 50% dimmed version of a color (used by ScannerUpdate)
     uint32_t DimColor(uint32_t color)
@@ -162,8 +205,6 @@ class NeoPatterns : public Adafruit_NeoPixel
     // Set all pixels to a color (synchronously)
     void ColorSet(uint32_t color)
     {
-        ActivePattern = NONE;
-        
         for (int i = 0; i < numPixels(); i++)
         {
             setPixelColor(i, color);
@@ -228,6 +269,14 @@ NeoPatterns Strip1(16, 2, NEO_GRB + NEO_KHZ800, &Strip1Complete); //button1
 NeoPatterns Strip2(18, 3, NEO_GRB + NEO_KHZ800, &Strip2Complete); //button2
 NeoPatterns Strip3(60, 4, NEO_GRB + NEO_KHZ800, &Strip3Complete); //ring1
 NeoPatterns Strip4(60, 5, NEO_GRB + NEO_KHZ800, &Strip4Complete); //ring2
+NeoPatterns Strip5(150, 6, NEO_GRB + NEO_KHZ800, &Strip4Complete); //panel1
+NeoPatterns Strip6(150, 7, NEO_GRB + NEO_KHZ800, &Strip4Complete); //panel2
+NeoPatterns Strip7(150, 8, NEO_GRB + NEO_KHZ800, &Strip4Complete); //panel3
+NeoPatterns Strip8(150, 9, NEO_GRB + NEO_KHZ800, &Strip4Complete); //display1
+NeoPatterns Strip9(150, 10, NEO_GRB + NEO_KHZ800, &Strip4Complete); //display2
+NeoPatterns Strip10(150, 11, NEO_GRB + NEO_KHZ800, &Strip4Complete); //display3
+NeoPatterns Strip11(150, A0, NEO_GRB + NEO_KHZ800, &Strip4Complete); //map1
+NeoPatterns Strip12(4, A1, NEO_GRB + NEO_KHZ800, &Strip4Complete); //map2 - 4 single pixels
 
 //------------------------------
 // setup
@@ -235,7 +284,9 @@ NeoPatterns Strip4(60, 5, NEO_GRB + NEO_KHZ800, &Strip4Complete); //ring2
 void setup() {
   Serial.begin(9600);
 
-  Strip1.begin(); Strip2.begin(); Strip3.begin(); Strip4.begin();
+  Strip1.begin(); Strip2.begin(); Strip3.begin(); Strip4.begin(); 
+  Strip5.begin(); Strip6.begin(); Strip7.begin(); Strip8.begin(); 
+  Strip9.begin(); Strip10.begin(); Strip11.begin(); Strip12.begin();
 }
 
 //-------------------------
@@ -244,7 +295,9 @@ void setup() {
 
 void loop() {
 
-  Strip1.Update(); Strip2.Update(); Strip3.Update();Strip4.Update(); 
+  Strip1.Update(); Strip2.Update(); Strip3.Update(); Strip4.Update();
+  Strip5.Update(); Strip6.Update(); Strip7.Update();Strip8.Update(); 
+  Strip9.Update(); Strip10.Update(); Strip11.Update();Strip12.Update();  
   
   read_from_serial();
 }
@@ -265,25 +318,7 @@ void read_from_serial() { //refer to other tab for command list
   }
 }
 
-// -----------------------------
-// Completion callback routines 
-// -----------------------------
 
-void Strip1Complete() {
-  if (DEBUG)  Serial.println("strip 1 complete");
-}
-
-void Strip2Complete() {
-  if (DEBUG) Serial.println("strip 2 complete");
-}
-
-void Strip3Complete() {
-  if (DEBUG)  Serial.println("strip 3 complete");
-}
-
-void Strip4Complete() {
-  if (DEBUG)  Serial.println("strip 4 complete");
-}
 
 
 

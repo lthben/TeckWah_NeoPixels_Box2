@@ -1,21 +1,38 @@
 /*
-Serial messages (byte 0 - 255):
- * 0 - turn on button 1 light
- * 1 - turn off button 1 light
- * 2 - turn on button 2 light
- * 3 - turn off button 2 light
- * 4 - turn on rfid 1 tag 1 light
- * 5 - turn on rfid 1 tag 2 light
- * 6 - turn on rfid 1 tag 3 light
- * 7 - turn on rfid 1 tag 4 light
- * 8 - turn on rfid 1 circle led waiting mode
- * 9 - turn off rfid 1 circle led  
- * a - turn on rfid 2 tag 1 light
- * b - turn on rfid 2 tag 2 light
- * c - turn on rfid 2 tag 3 light
- * d - turn on rfid 2 tag 4 light
- * e - turn on rfid 2 circle led waiting mode
- * f - turn off rfid 2 circle led 
+ * Button x 2, Ring x 2, Display x 3, Panel x 3, Map x 2 
+ *              
+ * 0 - turn on button 1 
+ * 1 - turn off button 1 
+ * 2 - turn on button 2 
+ * 3 - turn off button 2 
+ * 4 - ring 1 tag 1 
+ * 5 - ring 1 tag 2 
+ * 6 - ring 1 tag 3 
+ * 7 - ring 1 tag 4 
+ * 8 - ring 1 waiting mode
+ * 9 - turn off ring 1  
+ * a - ring 2 tag 1 
+ * b - ring 2 tag 2 
+ * c - ring 2 tag 3 
+ * d - ring 2 tag 4 
+ * e - ring 2 waiting mode
+ * f - turn off ring 2  
+ * g - turn on display 1 
+ * h - turn off display 1
+ * i - turn on display 2
+ * j - turn off display 2
+ * k - turn on display 3
+ * l - turn off display 3
+ * m - turn on panel 1
+ * n - turn off panel 1
+ * o - turn on panel 2
+ * p - turn off panel 2
+ * q - turn on panel 3
+ * r - turn off panel 3
+ * s - turn on map 1
+ * t - turn off map 1
+ * u - turn on map 2
+ * v - turn off map 2
  * */
 
 void process_command(int incoming) {
@@ -23,11 +40,11 @@ void process_command(int incoming) {
     switch(incoming) {
         //button1
         case('0'): Strip1.ColorSet( Strip1.whiteColor ); break; 
-        case('1'): Strip1.ColorSet( Strip1.noColor ); break;
+        case('1'): Strip1.TurnOff(); break;
         
         //button2
         case('2'): Strip2.ColorSet( Strip1.whiteColor ); break;
-        case('3'): Strip2.ColorSet( Strip1.noColor ); break;
+        case('3'): Strip2.TurnOff(); break;
         
         //ring1
         case('4'): Strip3.ColorSet( Strip1.pinkColor); break;
@@ -35,7 +52,7 @@ void process_command(int incoming) {
         case('6'): Strip3.ColorSet( Strip1.yellowColor); break;
         case('7'): Strip3.ColorSet( Strip1.blueColor); break;
         case('8'): Strip3.Scanner( Strip1.redColor, 50, 1); break;
-        case('9'): Strip3.ColorSet( Strip1.noColor); break; 
+        case('9'): Strip3.TurnOff(); break; 
         
         //ring2
         case('a'): Strip4.ColorSet( Strip1.pinkColor); break;
@@ -43,7 +60,40 @@ void process_command(int incoming) {
         case('c'): Strip4.ColorSet( Strip1.yellowColor); break;
         case('d'): Strip4.ColorSet( Strip1.blueColor); break;
         case('e'): Strip4.Scanner( Strip1.redColor, 50, 1); break;
-        case('f'): Strip4.ColorSet( Strip1.noColor); break;       
+        case('f'): Strip4.TurnOff(); break;   
+
+        //display1
+        case('g'): Strip5.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 1); break;   
+        case('h'): Strip5.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 0); break; 
+
+        //display2
+        case('i'): Strip6.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 1); break;   
+        case('j'): Strip6.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 0); break; 
+
+        //display3
+        case('k'): Strip7.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 1); break;   
+        case('l'): Strip7.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 0); break; 
+
+        //panel1
+        case('m'): Strip8.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 1); break;   
+        case('n'): Strip8.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 0); break; 
+
+        //panel2
+        case('o'): Strip9.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 1); break;   
+        case('p'): Strip9.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 0); break; 
+
+        //panel3
+        case('q'): Strip10.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 1); break;   
+        case('r'): Strip10.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 0); break; 
+
+        //map1
+        case('s'): Strip11.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 1); break;   
+        case('t'): Strip11.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 0); break; 
+
+        //map2 - slow pulsing single pixel LEDs
+        case('u'): Strip12.Fade( Strip1.whiteColor, 128, FADE_INTERVAL*5, 1); break;   
+        case('v'): Strip12.TurnOff(); break; 
+            
   }
  }
   
