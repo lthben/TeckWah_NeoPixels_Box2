@@ -9,7 +9,7 @@
 #include <Adafruit_NeoPixel.h> 
 
 //USER DEFINED SETTINGS
-bool DEBUG = false;
+bool DEBUG = true;
 const int FADE_INTERVAL = 10; //lower number is higher speed for fade
 
 enum  pattern { NONE, SCANNER, FADE };
@@ -35,7 +35,8 @@ class NeoPatterns : public Adafruit_NeoPixel
     uint32_t greenColor = Color(10, 220, 20 );
     uint32_t blueColor = Color(20, 20, 220);
     uint32_t yellowColor = Color( 255, 255, 0); 
-    uint32_t whiteColor = Color(255, 255, 255);
+    uint32_t white50Color = Color(128, 128, 128);
+    uint32_t whiteColor = Color(255,255,255);
     uint32_t warmWhiteColor = Color(255, 255, 200);
     uint32_t redColor = Color(255, 0, 0);
     uint32_t noColor = Color(0,0,0);
@@ -163,18 +164,17 @@ class NeoPatterns : public Adafruit_NeoPixel
         ActivePattern = FADE;
         Interval = interval;
         TotalSteps = steps;
-        Index = 0;
+        Color1 = noColor;
+        Color2 = _color1;
         
         if (state == 1) //turn on 
-        {   
-            Color1 = noColor;
-            Color2 = _color1;
+        {      
+            Index = 0;
             Direction = FORWARD;
             
         } else if (state == 0) //turn off
         {
-            Color1 = _color1;
-            Color2 = noColor;
+            Index = TotalSteps - 1;
             Direction = REVERSE;
         }
     }
@@ -258,9 +258,9 @@ class NeoPatterns : public Adafruit_NeoPixel
 // ------------------------------------------------------
 // Function prototypes for completion callback routines 
 // ------------------------------------------------------
-void Strip1Complete();
-void Strip2Complete();
-void Strip3Complete();
+void Strip1Complete(); void Strip2Complete(); void Strip3Complete(); void Strip4Complete();
+void Strip5Complete(); void Strip6Complete(); void Strip7Complete(); void Strip8Complete();
+void Strip9Complete(); void Strip10Complete(); void Strip11Complete(); void Strip12Complete();
 
 // -----------------------------
 // Object declarations
@@ -269,14 +269,14 @@ NeoPatterns Strip1(16, 2, NEO_GRB + NEO_KHZ800, &Strip1Complete); //button1
 NeoPatterns Strip2(18, 3, NEO_GRB + NEO_KHZ800, &Strip2Complete); //button2
 NeoPatterns Strip3(60, 4, NEO_GRB + NEO_KHZ800, &Strip3Complete); //ring1
 NeoPatterns Strip4(60, 5, NEO_GRB + NEO_KHZ800, &Strip4Complete); //ring2
-NeoPatterns Strip5(150, 6, NEO_GRB + NEO_KHZ800, &Strip4Complete); //panel1
-NeoPatterns Strip6(150, 7, NEO_GRB + NEO_KHZ800, &Strip4Complete); //panel2
-NeoPatterns Strip7(150, 8, NEO_GRB + NEO_KHZ800, &Strip4Complete); //panel3
-NeoPatterns Strip8(150, 9, NEO_GRB + NEO_KHZ800, &Strip4Complete); //display1
-NeoPatterns Strip9(150, 10, NEO_GRB + NEO_KHZ800, &Strip4Complete); //display2
-NeoPatterns Strip10(150, 11, NEO_GRB + NEO_KHZ800, &Strip4Complete); //display3
-NeoPatterns Strip11(150, A0, NEO_GRB + NEO_KHZ800, &Strip4Complete); //map1
-NeoPatterns Strip12(4, A1, NEO_GRB + NEO_KHZ800, &Strip4Complete); //map2 - 4 single pixels
+NeoPatterns Strip5(150, 6, NEO_GRB + NEO_KHZ800, &Strip5Complete); //panel1
+NeoPatterns Strip6(150, 7, NEO_GRB + NEO_KHZ800, &Strip6Complete); //panel2
+NeoPatterns Strip7(150, 8, NEO_GRB + NEO_KHZ800, &Strip7Complete); //panel3
+NeoPatterns Strip8(150, 9, NEO_GRB + NEO_KHZ800, &Strip8Complete); //display1
+NeoPatterns Strip9(150, 12, NEO_GRB + NEO_KHZ800, &Strip9Complete); //display2
+NeoPatterns Strip10(150, 13, NEO_GRB + NEO_KHZ800, &Strip10Complete); //display3
+NeoPatterns Strip11(150, A0, NEO_GRB + NEO_KHZ800, &Strip11Complete); //map1
+NeoPatterns Strip12(4, A1, NEO_GRB + NEO_KHZ800, &Strip12Complete); //map2 - 4 single pixels
 
 //------------------------------
 // setup
