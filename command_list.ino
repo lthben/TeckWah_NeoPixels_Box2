@@ -17,7 +17,7 @@
  * d - ring 2 tag 4 
  * e - ring 2 waiting mode
  * f - turn off ring 2  
- * g- turn on panel 1
+ * g - turn on panel 1
  * h - turn off panel 1
  * i - turn on panel 2
  * j - turn off panel 2

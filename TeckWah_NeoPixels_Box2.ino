@@ -10,7 +10,7 @@
 
 //USER DEFINED SETTINGS
 bool DEBUG = false;
-const int FADE_INTERVAL = 10; //lower number is higher speed for fade
+const int FADE_INTERVAL = 10; //lower number means higher speed for fade
 
 enum  pattern { NONE, SCANNER, FADE };
 enum  direction { FORWARD, REVERSE };
@@ -269,14 +269,14 @@ NeoPatterns Strip1(16, 2, NEO_GRB + NEO_KHZ800, &Strip1Complete); //button1
 NeoPatterns Strip2(18, 3, NEO_GRB + NEO_KHZ800, &Strip2Complete); //button2
 NeoPatterns Strip3(60, 4, NEO_GRB + NEO_KHZ800, &Strip3Complete); //ring1
 NeoPatterns Strip4(60, 5, NEO_GRB + NEO_KHZ800, &Strip4Complete); //ring2
-NeoPatterns Strip5(150, 6, NEO_GRB + NEO_KHZ800, &Strip5Complete); //panel1
-NeoPatterns Strip6(150, 7, NEO_GRB + NEO_KHZ800, &Strip6Complete); //panel2
-NeoPatterns Strip7(150, 8, NEO_GRB + NEO_KHZ800, &Strip7Complete); //panel3
+NeoPatterns Strip5(120, 6, NEO_GRB + NEO_KHZ800, &Strip5Complete); //panel1
+NeoPatterns Strip6(120, 7, NEO_GRB + NEO_KHZ800, &Strip6Complete); //panel2
+NeoPatterns Strip7(120, 8, NEO_GRB + NEO_KHZ800, &Strip7Complete); //panel3
 NeoPatterns Strip8(150, 9, NEO_GRB + NEO_KHZ800, &Strip8Complete); //display1
 NeoPatterns Strip9(150, 12, NEO_GRB + NEO_KHZ800, &Strip9Complete); //display2
 NeoPatterns Strip10(150, 13, NEO_GRB + NEO_KHZ800, &Strip10Complete); //display3
-NeoPatterns Strip11(150, A1, NEO_GRB + NEO_KHZ800, &Strip11Complete); //map1
-NeoPatterns Strip12(4, A0, NEO_GRB + NEO_KHZ800, &Strip12Complete); //map2 - 4 single pixels
+NeoPatterns Strip11(120, A0, NEO_GRB + NEO_KHZ800, &Strip11Complete); //map1
+NeoPatterns Strip12(4, A1, NEO_GRB + NEO_KHZ800, &Strip12Complete); //map2 - 4 single pixels
 
 //------------------------------
 // setup
