@@ -9,7 +9,7 @@
 #include <Adafruit_NeoPixel.h> 
 
 //USER DEFINED SETTINGS
-bool DEBUG = true;
+bool DEBUG = false;
 const int FADE_INTERVAL = 10; //lower number is higher speed for fade
 
 enum  pattern { NONE, SCANNER, FADE };
@@ -275,8 +275,8 @@ NeoPatterns Strip7(150, 8, NEO_GRB + NEO_KHZ800, &Strip7Complete); //panel3
 NeoPatterns Strip8(150, 9, NEO_GRB + NEO_KHZ800, &Strip8Complete); //display1
 NeoPatterns Strip9(150, 12, NEO_GRB + NEO_KHZ800, &Strip9Complete); //display2
 NeoPatterns Strip10(150, 13, NEO_GRB + NEO_KHZ800, &Strip10Complete); //display3
-NeoPatterns Strip11(150, A0, NEO_GRB + NEO_KHZ800, &Strip11Complete); //map1
-NeoPatterns Strip12(4, A1, NEO_GRB + NEO_KHZ800, &Strip12Complete); //map2 - 4 single pixels
+NeoPatterns Strip11(150, A1, NEO_GRB + NEO_KHZ800, &Strip11Complete); //map1
+NeoPatterns Strip12(4, A0, NEO_GRB + NEO_KHZ800, &Strip12Complete); //map2 - 4 single pixels
 
 //------------------------------
 // setup

@@ -59,10 +59,10 @@ void Strip12Complete() { //map2
     //pulsing animation
       if (Strip12.Direction == FORWARD) 
     {
-        Strip12.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 0); //change direction
+        Strip12.Fade( Strip1.white50Color, 128, FADE_INTERVAL, 0); //change direction
         
     } else 
     {
-        Strip12.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 1); //change direction
+        Strip12.Fade( Strip1.white50Color, 128, FADE_INTERVAL, 1); //change direction
     }
 }
