@@ -39,28 +39,28 @@ void process_command(int incoming) {
 
     switch(incoming) {
         //button1
-        case('0'): Strip1.ColorSet( Strip1.white50Color ); break; 
-        case('1'): Strip1.TurnOff(); break;
+        case('0'): Strip1.ActivePattern = NONE; Strip1.ColorSet( Strip1.white50Color ); break; 
+        case('1'): Strip1.ActivePattern = NONE; Strip1.TurnOff(); break;
         
         //button2
-        case('2'): Strip2.ColorSet( Strip1.white50Color ); break;
-        case('3'): Strip2.TurnOff(); break;
+        case('2'): Strip1.ActivePattern = NONE; Strip2.ColorSet( Strip1.white50Color ); break;
+        case('3'): Strip1.ActivePattern = NONE; Strip2.TurnOff(); break;
         
         //ring1
-        case('4'): Strip3.ColorSet( Strip1.pinkColor); break;
-        case('5'): Strip3.ColorSet( Strip1.greenColor); break;
-        case('6'): Strip3.ColorSet( Strip1.yellowColor); break;
-        case('7'): Strip3.ColorSet( Strip1.blueColor); break;
+        case('4'): Strip3.ActivePattern = NONE; Strip3.ColorSet( Strip1.pinkColor); break;
+        case('5'): Strip3.ActivePattern = NONE; Strip3.ColorSet( Strip1.greenColor); break;
+        case('6'): Strip3.ActivePattern = NONE; Strip3.ColorSet( Strip1.yellowColor); break;
+        case('7'): Strip3.ActivePattern = NONE; Strip3.ColorSet( Strip1.blueColor); break;
         case('8'): Strip3.Scanner( Strip1.redColor, 50, 1); break;
-        case('9'): Strip3.TurnOff(); break; 
+        case('9'): Strip3.ActivePattern = NONE; Strip3.TurnOff(); break; 
         
         //ring2
-        case('a'): Strip4.ColorSet( Strip1.pinkColor); break;
-        case('b'): Strip4.ColorSet( Strip1.greenColor); break;
-        case('c'): Strip4.ColorSet( Strip1.yellowColor); break;
-        case('d'): Strip4.ColorSet( Strip1.blueColor); break;
+        case('a'): Strip4.ActivePattern = NONE; Strip4.ColorSet( Strip1.pinkColor); break;
+        case('b'): Strip4.ActivePattern = NONE; Strip4.ColorSet( Strip1.greenColor); break;
+        case('c'): Strip4.ActivePattern = NONE; Strip4.ColorSet( Strip1.yellowColor); break;
+        case('d'): Strip4.ActivePattern = NONE; Strip4.ColorSet( Strip1.blueColor); break;
         case('e'): Strip4.Scanner( Strip1.redColor, 50, 1); break;
-        case('f'): Strip4.TurnOff(); break;   
+        case('f'): Strip4.ActivePattern = NONE; Strip4.TurnOff(); break;   
 
         //panel1
         case('g'): Strip5.Fade( Strip1.whiteColor, 128, FADE_INTERVAL, 1); break;   

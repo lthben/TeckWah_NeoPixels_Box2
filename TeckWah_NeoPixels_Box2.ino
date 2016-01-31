@@ -65,6 +65,8 @@ class NeoPatterns : public Adafruit_NeoPixel
                 case FADE:
                     FadeUpdate();
                 break;
+                case NONE:
+                break;
                 default:
                     break;
             }
