@@ -47,19 +47,19 @@ void process_command(int incoming) {
         case('3'): Strip1.ActivePattern = NONE; Strip2.TurnOff(); break;
         
         //ring1
-        case('4'): Strip3.ActivePattern = NONE; Strip3.ColorSet( Strip1.pinkColor); break;
-        case('5'): Strip3.ActivePattern = NONE; Strip3.ColorSet( Strip1.greenColor); break;
-        case('6'): Strip3.ActivePattern = NONE; Strip3.ColorSet( Strip1.yellowColor); break;
-        case('7'): Strip3.ActivePattern = NONE; Strip3.ColorSet( Strip1.blueColor); break;
-        case('8'): Strip3.Scanner( Strip1.redColor, 50, 1); break;
+        case('4'): Strip3.ActivePattern = NONE; Strip3.ColorSet( Strip1.white50Color); break;
+        case('5'): Strip3.ActivePattern = NONE; Strip3.ColorSet( Strip1.white50Color); break;
+        case('6'): Strip3.ActivePattern = NONE; Strip3.ColorSet( Strip1.white50Color); break;
+        case('7'): Strip3.ActivePattern = NONE; Strip3.ColorSet( Strip1.white50Color); break;
+        case('8'): Strip3.Scanner( Strip1.red50Color, 50, 1); break;
         case('9'): Strip3.ActivePattern = NONE; Strip3.TurnOff(); break; 
         
         //ring2
-        case('a'): Strip4.ActivePattern = NONE; Strip4.ColorSet( Strip1.pinkColor); break;
-        case('b'): Strip4.ActivePattern = NONE; Strip4.ColorSet( Strip1.greenColor); break;
-        case('c'): Strip4.ActivePattern = NONE; Strip4.ColorSet( Strip1.yellowColor); break;
-        case('d'): Strip4.ActivePattern = NONE; Strip4.ColorSet( Strip1.blueColor); break;
-        case('e'): Strip4.Scanner( Strip1.redColor, 50, 1); break;
+        case('a'): Strip4.ActivePattern = NONE; Strip4.ColorSet( Strip1.white50Color); break;
+        case('b'): Strip4.ActivePattern = NONE; Strip4.ColorSet( Strip1.white50Color); break;
+        case('c'): Strip4.ActivePattern = NONE; Strip4.ColorSet( Strip1.white50Color); break;
+        case('d'): Strip4.ActivePattern = NONE; Strip4.ColorSet( Strip1.white50Color); break;
+        case('e'): Strip4.Scanner( Strip1.red50Color, 50, 1); break;
         case('f'): Strip4.ActivePattern = NONE; Strip4.TurnOff(); break;   
 
         //panel1
