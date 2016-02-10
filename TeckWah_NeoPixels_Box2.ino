@@ -31,6 +31,16 @@ class NeoPatterns : public Adafruit_NeoPixel
     uint16_t TotalSteps;  // total number of steps in the pattern
     int Index;  // current step within the pattern
 
+    uint32_t pinkColor = Color(200, 40, 60);
+    uint32_t greenColor = Color(10, 220, 20 );
+    uint32_t blueColor = Color(20, 20, 220);
+    uint32_t yellowColor = Color( 255, 255, 0); 
+    uint32_t white50Color = Color(128, 128, 128);
+    uint32_t whiteColor = Color(255,255,255);
+    uint32_t warmWhiteColor = Color(255, 255, 200);
+    uint32_t red50Color = Color(128, 0, 0);
+    uint32_t noColor = Color(0,0,0);
+
     static const uint32_t pinkColor = Color(200, 40, 60);
     static const uint32_t greenColor = Color(10, 220, 20 );
     static const uint32_t blueColor = Color(20, 20, 220);
@@ -40,6 +50,7 @@ class NeoPatterns : public Adafruit_NeoPixel
     static const uint32_t warmWhiteColor = Color(255, 255, 200);
     static const uint32_t red50Color = Color(128, 0, 0);
     static const uint32_t noColor = Color(0,0,0);
+
     
     void (*OnComplete)();  // Callback on completion of pattern
     
